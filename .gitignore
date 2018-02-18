@@ -1,0 +1,9 @@
+*/build-*/*
+build-*/*
+*.pro.user*
+/.project
+*autosave
+.svn
+.~lock*
+/build
+.directory
