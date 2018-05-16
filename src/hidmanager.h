@@ -12,10 +12,8 @@ public:
 	void setPreset(const Preset& preset);
 
 private:
-	hid_device * msiKeyboard_;
-
-	void sendColor(const Preset& preset, Preset::Region region);
-	void sendMode(Preset::Mode mode);
+    void sendColor(hid_device *msiKeyboard, const Preset& preset, Preset::Region region);
+    void sendMode(hid_device* msiKeyboard, Preset::Mode mode);
 };
 
 #endif // HIDMANAGER_H

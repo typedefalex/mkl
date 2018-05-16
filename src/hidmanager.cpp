@@ -11,31 +11,30 @@ void HidManager::setPreset(const Preset& preset)
 {
 	if (hid_init())
 	{
-		//qDebug() << QString("Failed to initialize HIDAPI.");
-		exit(0);
+        std::cout << "Failed to initialize HIDAPI." << std::endl;
+        return;
 	}
 
-	msiKeyboard_ = hid_open(0x1770, 0xff00, 0);
+    hid_device* msiKeyboard = hid_open(0x1770, 0xff00, 0);
 
-	if (!msiKeyboard_)
+    if (!msiKeyboard)
 	{
+        std::cout << "Error opening the device." << std::endl;
 		hid_exit();
-		std::cout << "Hesdfsdfld!" << std::endl;
-		//qDebug() << QString("Error opening the device!\n");
 		return;
 	}
 
-	sendColor(preset, Preset::Region::Left);
-	sendColor(preset, Preset::Region::Middle);
-	sendColor(preset, Preset::Region::Right);
+    sendColor(msiKeyboard, preset, Preset::Region::Left);
+    sendColor(msiKeyboard, preset, Preset::Region::Middle);
+    sendColor(msiKeyboard, preset, Preset::Region::Right);
 
-	sendMode(Preset::Mode::Normal);
+    sendMode(msiKeyboard, Preset::Mode::Normal);
 
-	hid_close(msiKeyboard_);
+    hid_close(msiKeyboard);
 	hid_exit();
 }
 
-void HidManager::sendColor(const Preset& preset, Preset::Region region)
+void HidManager::sendColor(hid_device* msiKeyboard, const Preset& preset, Preset::Region region)
 {
 	unsigned char activate[8];
 
@@ -48,10 +47,10 @@ void HidManager::sendColor(const Preset& preset, Preset::Region region)
 	activate[6] = 0;
 	activate[7] = 236; // EOR (end of request)
 
-	hid_send_feature_report(msiKeyboard_, activate, 8);
+    hid_send_feature_report(msiKeyboard, activate, 8);
 }
 
-void HidManager::sendMode(Preset::Mode mode)
+void HidManager::sendMode(hid_device *msiKeyboard, Preset::Mode mode)
 {
 	unsigned char commit[8];
 
@@ -64,5 +63,5 @@ void HidManager::sendMode(Preset::Mode mode)
 	commit[6] = 0;
 	commit[7] = 236; // EOR
 
-	hid_send_feature_report(msiKeyboard_, commit, 8);
+    hid_send_feature_report(msiKeyboard, commit, 8);
 }

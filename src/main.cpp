@@ -1,21 +1,10 @@
-#include <pwd.h>
-#include <unistd.h>
-#include <sys/types.h>
-
-#include <sstream>
-
 #include "preset.h"
 #include "settings.h"
 #include "hidmanager.h"
 
 int main(int argc, char* argv[])
 {
-    const struct passwd* passwd = getpwuid(getuid());
-
-    std::ostringstream stringStream;
-    stringStream << "/home/" << passwd->pw_name << "/.config";
-
-    std::string settingsDir = stringStream.str();
+    std::string settingsDir("/etc");
     std::string settingsFile("mkl.conf");
 
 	Settings settings(settingsDir, settingsFile);

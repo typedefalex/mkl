@@ -21,8 +21,6 @@ Settings::Settings(std::string directory, std::string fileName)
 
 void Settings::savePreset(const Preset& preset)
 {
-    std::cout << "Unable to open filedf" <<settingsPath_ << std::endl;
-
 	std::ofstream myfile (settingsPath_, std::ios_base::trunc);
 
 	if (myfile.is_open())
