@@ -74,7 +74,6 @@ public:
 	}
 	friend std::istream& operator>>(std::istream& is, Preset& obj)
 	{
-
 		int region;
 		int color;
 		int level;
@@ -84,7 +83,6 @@ public:
 			is >> region;
 			is >> color;
 			is >> level;
-
 
 			obj.setColor(static_cast<Region>(region), static_cast<Color>(color));
 			obj.setLevel(static_cast<Region>(region), static_cast<Level>(level));

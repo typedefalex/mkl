@@ -13,13 +13,16 @@ Settings::Settings(std::string directory, std::string fileName)
 		std::cout << "Can't create directory. Use default preset." << std::endl;
 	else
 	{
-		std::ifstream presetFile(settingsPath_, std::ifstream::out);
+        std::ifstream presetFile(settingsPath_, std::ifstream::out);
+
 		presetFile.close();
 	}
 }
 
 void Settings::savePreset(const Preset& preset)
 {
+    std::cout << "Unable to open filedf" <<settingsPath_ << std::endl;
+
 	std::ofstream myfile (settingsPath_, std::ios_base::trunc);
 
 	if (myfile.is_open())
@@ -34,7 +37,6 @@ void Settings::savePreset(const Preset& preset)
 Preset Settings::loadPreset() const
 {
 	std::ifstream presetFile(settingsPath_, std::ifstream::in);
-	std::string presetLine;
 	Preset preset;
 
 	if (presetFile.is_open())
@@ -43,7 +45,7 @@ Preset Settings::loadPreset() const
 			preset = Preset();
 	}
 	else
-		std::cout << "Can't open file. Use default preset." << std::endl;
+        std::cout << "Can't open file. Load default preset." << std::endl;
 
 	presetFile.close();
 

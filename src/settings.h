@@ -1,8 +1,6 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include <iostream>
-
 #include "preset.h"
 
 class Settings

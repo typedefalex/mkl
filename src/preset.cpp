@@ -2,7 +2,6 @@
 
 #include <vector>
 #include <sstream>
-#include <iostream>
 #include <algorithm>
 
 Preset::Preset()
@@ -55,8 +54,6 @@ Preset::Region Preset::regionFromString(std::string region)
 		return Region::Right;
 
 	return Region::Incorrect;
-
-	//NOTICE
 }
 
 Preset::Color Preset::colorFromString(std::string color)
