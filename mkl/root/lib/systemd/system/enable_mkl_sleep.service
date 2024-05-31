@@ -1,0 +1,12 @@
+[Unit]
+Description=mkl sleep
+StopWhenUnneeded=true
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/sleep 4
+ExecStop=/etc/mkl/mkl
+
+[Install]
+WantedBy=suspend.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=Custom Start and Shutdown
+[Service]
+Type=oneshot
+ExecStart=/etc/mkl/mkl
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
